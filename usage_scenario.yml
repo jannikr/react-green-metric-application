@@ -15,6 +15,7 @@ services:
     image: curlimages/curl
     networks:
       - react-nginx-network
+    cmd: sh
 flow:
   - name: Check Website
     container: curl-container
@@ -22,5 +23,6 @@ flow:
       - type: console
         command: curl -s react-nginx-container
         note: Starting curl
+
 networks:
   react-nginx-network:
