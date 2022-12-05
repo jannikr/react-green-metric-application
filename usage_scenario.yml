@@ -1,0 +1,26 @@
+---
+name: My React Test
+author: Jan Rückert
+version: 1
+architecture: linux
+
+services:
+  react-nginx-container:
+    image: react-green-metric-application-main_react-app
+    ports:
+      - 8080:8080
+    networks:
+      - react-nginx-network
+  curl-container:
+    image: curlimages/curl
+    networks:
+      - react-nginx-network
+flow:
+  - name: Check Website
+    container: curl-container
+    commands:
+      - type: console
+        command: curl -s react-nginx-container
+        note: Starting curl
+networks:
+  react-nginx-network:
